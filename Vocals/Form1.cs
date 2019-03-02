@@ -211,7 +211,7 @@ namespace Vocals {
 
         void sr_speechRecognized(object sender, SpeechRecognizedEventArgs e) {
 
-            richTextBox1.AppendText("Commande reconnue \"" + e.Result.Text + "\" with confidence of : " + e.Result.Confidence + "\n");
+            richTextBox1.AppendText("Command recognized \"" + e.Result.Text + "\" with confidence of : " + e.Result.Confidence + "\n");
 
             Profile p = (Profile)comboBox2.SelectedItem;
 
@@ -403,7 +403,7 @@ namespace Vocals {
                     xmlStream.Close();
                 }
                 catch (Exception ex) {
-                    DialogResult res =  MessageBox.Show("Le fichier profiles_xml.vc est en cours d'utilisation par un autre processus. Voulez vous quitter sans sauvegarder ?", "Impossible de sauvegarder", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    DialogResult res =  MessageBox.Show("The profiles_xml.vc file is in use by another process. Do you want to leave without saving?", "Cannot Save Profile", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (res == DialogResult.No) {
                         e.Cancel = true;
                     }
@@ -411,7 +411,7 @@ namespace Vocals {
 
             }
             catch (Exception exception) {
-                DialogResult res = MessageBox.Show("Le fichier profiles.vd est en cours d'utilisation par un autre processus. Voulez vous quitter sans sauvegarder ?", "Impossible de sauvegarder", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                DialogResult res = MessageBox.Show("The profiles.vd file is in use by another process. Do you want to leave without saving?", "Cannot Save Profile", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                 if (res == DialogResult.No) {
                     e.Cancel = true;
                 }
