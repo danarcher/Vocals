@@ -32,6 +32,15 @@ namespace Vocals
             this.keyModifier = modifier;
         }
 
+        public Actions Clone()
+        {
+            return new Actions(type, keys, keyModifier, timer);
+        }
+
+        public bool IsValid
+        {
+            get { return type == "Key press" && keys != Keys.None || type == "Timer" && timer > float.Epsilon; }
+        }
 
         public override string ToString() {
             switch (type) {

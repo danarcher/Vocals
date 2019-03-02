@@ -31,7 +31,7 @@ namespace Vocals {
 
         public FormCommand(Command c) {
             InitializeComponent();
-            actionList = c.actionList;
+            actionList = new List<Actions>(c.actionList.Select(x => x.Clone()));
             commandString = c.commandString;
 
             answering = c.answering;
@@ -63,25 +63,15 @@ namespace Vocals {
             }
         }
 
-        private void button1_Click(object sender, EventArgs e) {
+        private void AddActionButton_Click(object sender, EventArgs e) {
             FormAction newActionForm = new FormAction();
-            newActionForm.ShowDialog();
+            if (newActionForm.ShowDialog() == DialogResult.OK && newActionForm.Action.IsValid)
+            {
+                actionList.Add(newActionForm.Action);
 
-            if (newActionForm.selectedType != "") {
-                if (newActionForm.selectedType == "Key press" && newActionForm.selectedKey != Keys.None
-                    || newActionForm.selectedType == "Timer" && newActionForm.selectedTimer != 0) {
-
-                    Actions myNewAction = new Actions(newActionForm.selectedType, newActionForm.selectedKey, newActionForm.modifier, newActionForm.selectedTimer);
-                    
-
-                    actionList.Add(myNewAction);
-
-                    listBox1.DataSource = null;
-                    listBox1.DataSource = actionList;
-                }
+                listBox1.DataSource = null;
+                listBox1.DataSource = actionList;
             }
-
-
         }
 
         private void FormPopup_Load(object sender, EventArgs e) {
@@ -92,31 +82,22 @@ namespace Vocals {
 
         }
 
-        private void button4_Click(object sender, EventArgs e) {
-            this.Close();
-        }
-
-        private void button5_Click(object sender, EventArgs e) {
-            commandString = "";
-            actionList.Clear();
-            this.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e) {
+        private void EditActionButton_Click(object sender, EventArgs e) {
             Actions a = (Actions)listBox1.SelectedItem;
             if (a != null) {
-                FormAction formEditAction = new FormAction(a);
-                formEditAction.ShowDialog();
+                FormAction formEditAction = new FormAction(a.Clone());
+                if (formEditAction.ShowDialog() == DialogResult.OK && formEditAction.Action.IsValid)
+                {
+                    var index = actionList.IndexOf(a);
+                    if (index >= 0)
+                    {
+                        actionList.RemoveAt(index);
+                        actionList.Insert(index, formEditAction.Action);
 
-                a.keys = formEditAction.selectedKey;
-                a.type = formEditAction.selectedType;
-                a.keyModifier = formEditAction.modifier;
-                a.timer = (float)formEditAction.selectedTimer;
-
-                listBox1.DataSource = null;
-                listBox1.DataSource = actionList;
-
-
+                        listBox1.DataSource = null;
+                        listBox1.DataSource = actionList;
+                    }
+                }
             }
         }
 

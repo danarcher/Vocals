@@ -12,18 +12,11 @@ namespace Vocals {
     public partial class FormAction : Form {
         Keys[] keyDataSource;
 
-        public float selectedTimer { get; set; }
-
-        public Keys selectedKey { get; set; }
-
-        public string selectedType { get; set; }
-
-        public Keys modifier { get; set; }
+        public Actions Action { get; set; } = new Actions();
         
         public FormAction() {
 
             InitializeComponent();
-
             keyDataSource = (Keys[])Enum.GetValues(typeof(Keys)).Cast<Keys>();
 
             comboBox2.DataSource = keyDataSource;
@@ -37,10 +30,8 @@ namespace Vocals {
         public FormAction(Actions a) {
             InitializeComponent();
             keyDataSource = (Keys[])Enum.GetValues(typeof(Keys)).Cast<Keys>();
-           
 
             comboBox2.DataSource = keyDataSource;
-
             comboBox1.DataSource = new string[] { "Key press", "Timer" };
 
             numericUpDown1.DecimalPlaces = 2;
@@ -63,15 +54,13 @@ namespace Vocals {
                 default :
                     break;
             }
-        }
 
-        private void FormAction_Load(object sender, System.EventArgs e) {
+            Action = a;
         }
-        
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
-            selectedType = (string)comboBox1.SelectedItem;
-            switch (selectedType) {
+            Action.type= (string)comboBox1.SelectedItem;
+            switch (Action.type) {
                 case "Key press" :
                     numericUpDown1.Enabled = false;
                     comboBox2.Enabled = true;
@@ -92,32 +81,21 @@ namespace Vocals {
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e) {
-            selectedTimer = (float)numericUpDown1.Value;
+            Action.timer = (float)numericUpDown1.Value;
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) {
-            selectedKey = (Keys)comboBox2.SelectedItem;
-        }
-
-        private void button1_Click(object sender, EventArgs e) {
-            this.Close();
-        }
-
-        private void button2_Click(object sender, EventArgs e) {
-            selectedType = "";
-            selectedTimer = 0;
-            selectedKey = Keys.None;
-            this.Close();
+            Action.keys = (Keys)comboBox2.SelectedItem;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e) {
             if (checkBox1.Checked) {
                 checkBox2.Checked = false;
                 checkBox3.Checked = false;
-                modifier = Keys.ControlKey;
+                Action.keyModifier = Keys.ControlKey;
             }
             else {
-                modifier = Keys.None;
+                Action.keyModifier = Keys.None;
             }
         }
 
@@ -125,10 +103,10 @@ namespace Vocals {
             if (checkBox2.Checked) {
                 checkBox1.Checked = false;
                 checkBox3.Checked = false;
-                modifier = Keys.ShiftKey;
+                Action.keyModifier = Keys.ShiftKey;
             }
             else {
-                modifier = Keys.None;
+                Action.keyModifier = Keys.None;
             }
         }
 
@@ -136,16 +114,11 @@ namespace Vocals {
             if (checkBox3.Checked) {
                 checkBox1.Checked = false;
                 checkBox2.Checked = false;
-                modifier = Keys.Alt;
+                Action.keyModifier = Keys.Alt;
             }
             else {
-                modifier = Keys.None;
+                Action.keyModifier = Keys.None;
             }
         }
-
-
-
-
-
     }
 }

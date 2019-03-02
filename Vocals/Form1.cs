@@ -321,19 +321,21 @@ namespace Vocals {
                     listening = false;
 
                     FormCommand formCommand = new FormCommand();
-                    formCommand.ShowDialog();
-
-                    Profile p = (Profile)comboBox2.SelectedItem;
-
-                    if (p != null) {
-                        if (formCommand.commandString != null && formCommand.commandString != "" && formCommand.actionList.Count != 0) {
-                            Command c;
-                            c = new Command(formCommand.commandString, formCommand.actionList, formCommand.answering, formCommand.answeringString, formCommand.answeringSound, formCommand.answeringSoundPath);
-                            p.addCommand(c);
-                            listBox1.DataSource = null;
-                            listBox1.DataSource = p.commandList;
+                    if (formCommand.ShowDialog() == DialogResult.OK)
+                    {
+                        Profile p = (Profile)comboBox2.SelectedItem;
+                        if (p != null)
+                        {
+                            if (formCommand.commandString != null && formCommand.commandString != "" && formCommand.actionList.Count != 0)
+                            {
+                                Command c;
+                                c = new Command(formCommand.commandString, formCommand.actionList, formCommand.answering, formCommand.answeringString, formCommand.answeringSound, formCommand.answeringSoundPath);
+                                p.addCommand(c);
+                                listBox1.DataSource = null;
+                                listBox1.DataSource = p.commandList;
+                            }
+                            refreshProfile(p);
                         }
-                        refreshProfile(p);
                     }
 
                     if (speechEngine.Grammars.Count != 0) {
@@ -466,33 +468,36 @@ namespace Vocals {
                     Command c = (Command)listBox1.SelectedItem;
                     if (c != null) {
                         FormCommand formCommand = new FormCommand(c);
-                        formCommand.ShowDialog();
+                        if (formCommand.ShowDialog() == DialogResult.OK)
+                        {
+                            Profile p = (Profile)comboBox2.SelectedItem;
 
-                        Profile p = (Profile)comboBox2.SelectedItem;
+                            if (p != null)
+                            {
+                                if (formCommand.commandString != "" && formCommand.actionList.Count != 0)
+                                {
+                                    c.commandString = formCommand.commandString;
+                                    c.actionList = formCommand.actionList;
+                                    c.answering = formCommand.answering;
+                                    c.answeringString = formCommand.answeringString;
+                                    c.answeringSound = formCommand.answeringSound;
+                                    c.answeringSoundPath = formCommand.answeringSoundPath;
+
+                                    if (c.answeringSoundPath == null)
+                                    {
+                                        c.answeringSoundPath = "";
+                                    }
+                                    if (c.answeringString == null)
+                                    {
+                                        c.answeringString = "";
+                                    }
 
 
-                        if (p != null) {
-                            if (formCommand.commandString != "" && formCommand.actionList.Count != 0) {
-
-                                c.commandString = formCommand.commandString;
-                                c.actionList = formCommand.actionList;
-                                c.answering = formCommand.answering;
-                                c.answeringString = formCommand.answeringString;
-                                c.answeringSound = formCommand.answeringSound;
-                                c.answeringSoundPath = formCommand.answeringSoundPath;
-
-                                if (c.answeringSoundPath == null) {
-                                    c.answeringSoundPath = "";
+                                    listBox1.DataSource = null;
+                                    listBox1.DataSource = p.commandList;
                                 }
-                                if (c.answeringString == null) {
-                                    c.answeringString = "";
-                                }
-                               
-
-                                listBox1.DataSource = null;
-                                listBox1.DataSource = p.commandList;
+                                refreshProfile(p);
                             }
-                            refreshProfile(p);
                         }
 
                         if (speechEngine.Grammars.Count != 0) {
