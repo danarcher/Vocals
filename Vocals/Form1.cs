@@ -300,9 +300,9 @@ namespace Vocals {
                 }
 
                 GrammarBuilder builder = new GrammarBuilder();
+                builder.Culture = speechEngine.RecognizerInfo.Culture;
                 builder.Append(myWordChoices);
                 Grammar mygram = new Grammar(builder);
-
 
                 speechEngine.UnloadAllGrammars();
                 speechEngine.LoadGrammar(mygram);
