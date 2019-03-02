@@ -21,7 +21,7 @@ namespace Vocals.InternalClasses {
             try {
                 load();
             }
-            catch(Exception e){
+            catch(Exception){
                 toggleListening = false;
                 key = Keys.ShiftKey;
                 answer = "Toggle listening";

@@ -83,7 +83,7 @@ namespace Vocals {
                         synth.SpeakAsync(answeringString);
                     }
                 }
-                catch(Exception e){
+                catch(Exception){
                     
                 }
             }

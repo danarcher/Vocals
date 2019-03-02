@@ -191,7 +191,7 @@ namespace Vocals {
             try {
                 speechEngine.SetInputToDefaultAudioDevice();
             }
-            catch (InvalidOperationException ioe) {
+            catch (InvalidOperationException) {
                 richTextBox1.AppendText("No microphone were found\n");
             }
 
@@ -402,7 +402,7 @@ namespace Vocals {
                     writer.Serialize(xmlStream, profileList);
                     xmlStream.Close();
                 }
-                catch (Exception ex) {
+                catch (Exception) {
                     DialogResult res =  MessageBox.Show("The profiles_xml.vc file is in use by another process. Do you want to leave without saving?", "Cannot Save Profile", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (res == DialogResult.No) {
                         e.Cancel = true;
@@ -410,7 +410,7 @@ namespace Vocals {
                 }
 
             }
-            catch (Exception exception) {
+            catch (Exception) {
                 DialogResult res = MessageBox.Show("The profiles.vd file is in use by another process. Do you want to leave without saving?", "Cannot Save Profile", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                 if (res == DialogResult.No) {
                     e.Cancel = true;
