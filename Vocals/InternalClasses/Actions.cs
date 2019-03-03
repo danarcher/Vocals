@@ -45,7 +45,7 @@ namespace Vocals
         public override string ToString() {
             switch (type) {
                 case "Key press":
-                    return "Key press : " + keys.ToString();
+                    return "Key press : " + (keyModifier != Keys.None ? (keyModifier.ToString() + " + "): string.Empty) + keys.ToString();
                 case "Timer":
                     return "Timer : " + timer.ToString() + " secs";
                 default:
