@@ -57,9 +57,18 @@ namespace Vocals
         public void perform() {
             switch (type) {
                 case "Key press":
+                    if (keyModifier != Keys.None)
+                    {
+                        inputSimulator.Keyboard.KeyDown((VirtualKeyCode)keyModifier);
+                    }
                     inputSimulator.Keyboard.KeyDown((VirtualKeyCode)keys);
                     Thread.Sleep(100);
                     inputSimulator.Keyboard.KeyUp((VirtualKeyCode)keys);
+                    if (keyModifier != Keys.None)
+                    {
+                        inputSimulator.Keyboard.KeyUp((VirtualKeyCode)keyModifier);
+                    }
+                    Thread.Sleep(100);
                     break;
                 case "Timer":
                     Thread.Sleep((int)(timer*1000));
