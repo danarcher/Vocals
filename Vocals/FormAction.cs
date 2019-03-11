@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 
-namespace Vocals {
+namespace Vocals
+{
     public partial class FormAction : Form {
-        Keys[] keyDataSource;
+        Keys[] keyDataSource, keyDataSource2;
 
         public Actions Action { get; set; } = new Actions();
         
@@ -18,42 +14,42 @@ namespace Vocals {
 
             InitializeComponent();
             keyDataSource = (Keys[])Enum.GetValues(typeof(Keys)).Cast<Keys>();
+            keyDataSource2 = (Keys[])Enum.GetValues(typeof(Keys)).Cast<Keys>();
 
+            comboBox3.DataSource = keyDataSource2;
             comboBox2.DataSource = keyDataSource;
-          
             comboBox1.DataSource = new string[]{"Key press","Timer"};
 
             numericUpDown1.DecimalPlaces = 2;
             numericUpDown1.Increment = 0.1M;
         }
 
-        public FormAction(Actions a) {
+        public FormAction(Actions a)
+        {
             InitializeComponent();
             keyDataSource = (Keys[])Enum.GetValues(typeof(Keys)).Cast<Keys>();
+            keyDataSource2 = (Keys[])Enum.GetValues(typeof(Keys)).Cast<Keys>();
 
+            comboBox3.DataSource = keyDataSource2;
             comboBox2.DataSource = keyDataSource;
             comboBox1.DataSource = new string[] { "Key press", "Timer" };
 
             numericUpDown1.DecimalPlaces = 2;
             numericUpDown1.Increment = 0.1M;
 
+            SetFromAction(a);
+        }
+
+        private void SetFromAction(Actions a)
+        {
+            comboBox3.SelectedItem = a.pre;
             comboBox2.SelectedItem = a.keys;
             numericUpDown1.Value = Convert.ToDecimal(a.timer);
             comboBox1.SelectedItem = a.type;
 
-            switch (a.keyModifier) {
-                case Keys.ControlKey:
-                    checkBox1.Checked = true;
-                    break;
-                case Keys.ShiftKey:
-                    checkBox2.Checked = true;
-                    break;
-                case Keys.Alt:
-                    checkBox3.Checked = true;
-                    break;
-                default :
-                    break;
-            }
+            checkBox1.Checked = a.keyModifier.HasFlag(Keys.Control);
+            checkBox2.Checked = a.keyModifier.HasFlag(Keys.Shift);
+            checkBox3.Checked = a.keyModifier.HasFlag(Keys.Alt);
 
             Action = a;
         }
@@ -88,36 +84,34 @@ namespace Vocals {
             Action.keys = (Keys)comboBox2.SelectedItem;
         }
 
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Action.pre = (Keys)comboBox3.SelectedItem;
+        }
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e) {
-            if (checkBox1.Checked) {
-                checkBox2.Checked = false;
-                checkBox3.Checked = false;
-                Action.keyModifier = Keys.ControlKey;
-            }
-            else {
-                Action.keyModifier = Keys.None;
-            }
+            Action.keyModifier &= ~Keys.Control;
+            if (checkBox1.Checked) Action.keyModifier |= Keys.Control;
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e) {
-            if (checkBox2.Checked) {
-                checkBox1.Checked = false;
-                checkBox3.Checked = false;
-                Action.keyModifier = Keys.ShiftKey;
-            }
-            else {
-                Action.keyModifier = Keys.None;
-            }
+            Action.keyModifier &= ~Keys.Shift;
+            if (checkBox1.Checked) Action.keyModifier |= Keys.Shift;
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e) {
-            if (checkBox3.Checked) {
-                checkBox1.Checked = false;
-                checkBox2.Checked = false;
-                Action.keyModifier = Keys.Alt;
-            }
-            else {
-                Action.keyModifier = Keys.None;
+            Action.keyModifier &= ~Keys.Alt;
+            if (checkBox1.Checked) Action.keyModifier |= Keys.Alt;
+        }
+
+        private void Detect_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FormDetect())
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    SetFromAction(dialog.Action);
+                }
             }
         }
     }

@@ -31,23 +31,24 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.processComboBox = new System.Windows.Forms.ComboBox();
+            this.addCommandButton = new System.Windows.Forms.Button();
+            this.profileComboBox = new System.Windows.Forms.ComboBox();
+            this.addProfileButton = new System.Windows.Forms.Button();
+            this.commandListBox = new System.Windows.Forms.ListBox();
+            this.deleteProfileButton = new System.Windows.Forms.Button();
+            this.deleteCommandButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.editCommandButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.refreshProcessListButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.advancedSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.startRecognitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -61,144 +62,141 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // comboBox1
+            // processComboBox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(29, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(187, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.processComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.processComboBox.FormattingEnabled = true;
+            this.processComboBox.Location = new System.Drawing.Point(29, 38);
+            this.processComboBox.Name = "processComboBox";
+            this.processComboBox.Size = new System.Drawing.Size(187, 21);
+            this.processComboBox.TabIndex = 1;
+            this.processComboBox.SelectedIndexChanged += new System.EventHandler(this.ProcessComboBox_SelectedIndexChanged);
             // 
-            // button1
+            // addCommandButton
             // 
-            this.button1.Location = new System.Drawing.Point(29, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.addCommandButton.Location = new System.Drawing.Point(29, 19);
+            this.addCommandButton.Name = "addCommandButton";
+            this.addCommandButton.Size = new System.Drawing.Size(70, 23);
+            this.addCommandButton.TabIndex = 1;
+            this.addCommandButton.Text = "&Add";
+            this.addCommandButton.UseVisualStyleBackColor = true;
+            this.addCommandButton.Click += new System.EventHandler(this.AddCommandButton_Click);
             // 
-            // comboBox2
+            // profileComboBox
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(29, 52);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(226, 21);
-            this.comboBox2.TabIndex = 5;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.profileComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.profileComboBox.FormattingEnabled = true;
+            this.profileComboBox.Location = new System.Drawing.Point(29, 52);
+            this.profileComboBox.Name = "profileComboBox";
+            this.profileComboBox.Size = new System.Drawing.Size(226, 21);
+            this.profileComboBox.TabIndex = 0;
+            this.profileComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
-            // button2
+            // addProfileButton
             // 
-            this.button2.Location = new System.Drawing.Point(29, 23);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Add profile";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.addProfileButton.Location = new System.Drawing.Point(29, 23);
+            this.addProfileButton.Name = "addProfileButton";
+            this.addProfileButton.Size = new System.Drawing.Size(98, 23);
+            this.addProfileButton.TabIndex = 1;
+            this.addProfileButton.Text = "Add profile";
+            this.addProfileButton.UseVisualStyleBackColor = true;
+            this.addProfileButton.Click += new System.EventHandler(this.AddProfile_Click);
             // 
-            // listBox1
+            // commandListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(29, 48);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(226, 134);
-            this.listBox1.TabIndex = 8;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.commandListBox.FormattingEnabled = true;
+            this.commandListBox.Location = new System.Drawing.Point(29, 48);
+            this.commandListBox.Name = "commandListBox";
+            this.commandListBox.Size = new System.Drawing.Size(226, 134);
+            this.commandListBox.TabIndex = 0;
+            this.commandListBox.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // button3
+            // deleteProfileButton
             // 
-            this.button3.Location = new System.Drawing.Point(151, 23);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(104, 23);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Delete profile";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.deleteProfileButton.Location = new System.Drawing.Point(151, 23);
+            this.deleteProfileButton.Name = "deleteProfileButton";
+            this.deleteProfileButton.Size = new System.Drawing.Size(104, 23);
+            this.deleteProfileButton.TabIndex = 2;
+            this.deleteProfileButton.Text = "Delete profile";
+            this.deleteProfileButton.UseVisualStyleBackColor = true;
+            this.deleteProfileButton.Click += new System.EventHandler(this.DeleteProfileButton_Click);
             // 
-            // button4
+            // deleteCommandButton
             // 
-            this.button4.Location = new System.Drawing.Point(185, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(70, 23);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.deleteCommandButton.Location = new System.Drawing.Point(185, 19);
+            this.deleteCommandButton.Name = "deleteCommandButton";
+            this.deleteCommandButton.Size = new System.Drawing.Size(70, 23);
+            this.deleteCommandButton.TabIndex = 3;
+            this.deleteCommandButton.Text = "&Delete";
+            this.deleteCommandButton.UseVisualStyleBackColor = true;
+            this.deleteCommandButton.Click += new System.EventHandler(this.DeleteCommandButton_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.addProfileButton);
+            this.groupBox1.Controls.Add(this.deleteProfileButton);
+            this.groupBox1.Controls.Add(this.profileComboBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 27);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(277, 83);
-            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Profiles";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.editCommandButton);
+            this.groupBox2.Controls.Add(this.commandListBox);
+            this.groupBox2.Controls.Add(this.deleteCommandButton);
+            this.groupBox2.Controls.Add(this.addCommandButton);
             this.groupBox2.Location = new System.Drawing.Point(307, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(277, 190);
-            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Commands ";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            this.groupBox2.Text = "&Commands";
             // 
-            // button5
+            // editCommandButton
             // 
-            this.button5.Location = new System.Drawing.Point(107, 19);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(70, 23);
-            this.button5.TabIndex = 12;
-            this.button5.Text = "Edit";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            this.editCommandButton.Location = new System.Drawing.Point(107, 19);
+            this.editCommandButton.Name = "editCommandButton";
+            this.editCommandButton.Size = new System.Drawing.Size(70, 23);
+            this.editCommandButton.TabIndex = 2;
+            this.editCommandButton.Text = "&Edit";
+            this.editCommandButton.UseVisualStyleBackColor = true;
+            this.editCommandButton.Click += new System.EventHandler(this.EditCommandButton_Click);
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button6);
-            this.groupBox4.Controls.Add(this.comboBox1);
+            this.groupBox4.Controls.Add(this.refreshProcessListButton);
+            this.groupBox4.Controls.Add(this.processComboBox);
             this.groupBox4.Location = new System.Drawing.Point(12, 123);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(277, 94);
-            this.groupBox4.TabIndex = 15;
+            this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Application";
-            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
-            // button6
+            // refreshProcessListButton
             // 
-            this.button6.Location = new System.Drawing.Point(222, 38);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(33, 23);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "#";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.refreshProcessListButton.Location = new System.Drawing.Point(222, 38);
+            this.refreshProcessListButton.Name = "refreshProcessListButton";
+            this.refreshProcessListButton.Size = new System.Drawing.Size(33, 23);
+            this.refreshProcessListButton.TabIndex = 2;
+            this.refreshProcessListButton.Text = "#";
+            this.refreshProcessListButton.UseVisualStyleBackColor = true;
+            this.refreshProcessListButton.Click += new System.EventHandler(this.RefreshProcessListButton_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.progressBar1);
-            this.groupBox3.Controls.Add(this.richTextBox1);
+            this.groupBox3.Controls.Add(this.richTextBox);
             this.groupBox3.Location = new System.Drawing.Point(12, 223);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(572, 217);
-            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "logs";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // progressBar1
             // 
@@ -208,32 +206,39 @@
             this.progressBar1.Step = 11;
             this.progressBar1.TabIndex = 1;
             // 
-            // richTextBox1
+            // richTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(6, 36);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(544, 175);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richTextBox.Location = new System.Drawing.Point(6, 36);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.ReadOnly = true;
+            this.richTextBox.Size = new System.Drawing.Size(544, 175);
+            this.richTextBox.TabIndex = 0;
+            this.richTextBox.Text = "";
             // 
             // advancedSettingsToolStripMenuItem
             // 
             this.advancedSettingsToolStripMenuItem.Name = "advancedSettingsToolStripMenuItem";
             this.advancedSettingsToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
-            this.advancedSettingsToolStripMenuItem.Text = "Advanced Settings";
-            this.advancedSettingsToolStripMenuItem.Click += new System.EventHandler(this.advancedSettingsToolStripMenuItem_Click);
+            this.advancedSettingsToolStripMenuItem.Text = "Ad&vanced Settings";
+            this.advancedSettingsToolStripMenuItem.Click += new System.EventHandler(this.AdvancedSettings_Click);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.advancedSettingsToolStripMenuItem});
+            this.advancedSettingsToolStripMenuItem,
+            this.startRecognitionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(597, 24);
             this.menuStrip1.TabIndex = 17;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            // 
+            // startRecognitionToolStripMenuItem
+            // 
+            this.startRecognitionToolStripMenuItem.Name = "startRecognitionToolStripMenuItem";
+            this.startRecognitionToolStripMenuItem.Size = new System.Drawing.Size(121, 20);
+            this.startRecognitionToolStripMenuItem.Text = "&Start Recognition >";
+            this.startRecognitionToolStripMenuItem.Click += new System.EventHandler(this.StartRecognition_Click);
             // 
             // Form1
             // 
@@ -250,7 +255,6 @@
             this.Name = "Form1";
             this.Text = "Vocals";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -265,23 +269,24 @@
         #endregion
 
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ComboBox processComboBox;
+        private System.Windows.Forms.Button addCommandButton;
+        private System.Windows.Forms.ComboBox profileComboBox;
+        private System.Windows.Forms.Button addProfileButton;
+        private System.Windows.Forms.ListBox commandListBox;
+        private System.Windows.Forms.Button deleteProfileButton;
+        private System.Windows.Forms.Button deleteCommandButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.RichTextBox richTextBox;
+        private System.Windows.Forms.Button editCommandButton;
         private System.Windows.Forms.ToolStripMenuItem advancedSettingsToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button refreshProcessListButton;
+        private System.Windows.Forms.ToolStripMenuItem startRecognitionToolStripMenuItem;
     }
 }
 

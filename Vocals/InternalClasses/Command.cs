@@ -70,7 +70,7 @@ namespace Vocals {
         [DllImport("User32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
-        public void perform(IntPtr winPointer) {
+        public void Perform(IntPtr winPointer) {
             SetForegroundWindow(winPointer);
             ShowWindow(winPointer, 5);
             foreach (Actions a in actionList) {

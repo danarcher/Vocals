@@ -1,0 +1,16 @@
+This is a Release build of:
+
+https://github.com/TChatzigiannakis/InputSimulatorPlus
+
+as at the July 7 2018 commit:
+
+"Removed LMENU from the list of extended keys."
+hash beginning af96f2a453d4.
+
+This is a later commit than present in the latest Nuget version at time
+of writing, v1.7, uploaded 22 April 2018.
+
+https://www.nuget.org/packages/InputSimulatorPlus/.
+
+Once Nuget is updated this dependency may be taken via a Nuget package
+rather than a local binary.

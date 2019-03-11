@@ -17,24 +17,26 @@ namespace Vocals
         private static InputSimulator inputSimulator = new InputSimulator();
 
         public string type;
-        public  System.Windows.Forms.Keys keys;
+        public Keys keys;
         public float timer;
-        public System.Windows.Forms.Keys keyModifier;
+        public Keys keyModifier;
+        public Keys pre;
 
         public Actions() {
 
         }
-        public Actions(string type, System.Windows.Forms.Keys keys, System.Windows.Forms.Keys modifier, float timer) {
+        public Actions(string type, float timer, Keys modifier, Keys pre, Keys keys) {
             // TODO: Complete member initialization
             this.type = type;
-            this.keys = keys;
             this.timer = timer;
             this.keyModifier = modifier;
+            this.pre = pre;
+            this.keys = keys;
         }
 
         public Actions Clone()
         {
-            return new Actions(type, keys, keyModifier, timer);
+            return new Actions(type, timer, keyModifier, pre, keys);
         }
 
         public bool IsValid
@@ -43,9 +45,14 @@ namespace Vocals
         }
 
         public override string ToString() {
+            string text;
             switch (type) {
                 case "Key press":
-                    return "Key press : " + (keyModifier != Keys.None ? (keyModifier.ToString() + " + "): string.Empty) + keys.ToString();
+                    text = "Key press : ";
+                    if (keyModifier != Keys.None) text += keyModifier.ToString() + " ";
+                    if (pre != Keys.None) text += pre.ToString() + " ";
+                    text += keys.ToString();
+                    return text;
                 case "Timer":
                     return "Timer : " + timer.ToString() + " secs";
                 default:
@@ -59,16 +66,32 @@ namespace Vocals
                 case "Key press":
                     if (keyModifier != Keys.None)
                     {
-                        inputSimulator.Keyboard.KeyDown((VirtualKeyCode)keyModifier);
+                        if (keyModifier.HasFlag(Keys.Control)) inputSimulator.Keyboard.KeyDown((VirtualKeyCode)Keys.ControlKey);
+                        if (keyModifier.HasFlag(Keys.Shift)) inputSimulator.Keyboard.KeyDown((VirtualKeyCode)Keys.ShiftKey);
+                        if (keyModifier.HasFlag(Keys.Alt)) inputSimulator.Keyboard.KeyDown((VirtualKeyCode)Keys.LMenu);
+                        Thread.Sleep(10);
+                    }
+                    if (pre != Keys.None)
+                    {
+                        inputSimulator.Keyboard.KeyDown((VirtualKeyCode)pre);
+                        Thread.Sleep(10);
                     }
                     inputSimulator.Keyboard.KeyDown((VirtualKeyCode)keys);
-                    Thread.Sleep(100);
+                    Thread.Sleep(50);
                     inputSimulator.Keyboard.KeyUp((VirtualKeyCode)keys);
+                    if (pre != Keys.None)
+                    {
+                        Thread.Sleep(10);
+                        inputSimulator.Keyboard.KeyUp((VirtualKeyCode)pre);
+                    }
                     if (keyModifier != Keys.None)
                     {
-                        inputSimulator.Keyboard.KeyUp((VirtualKeyCode)keyModifier);
+                        Thread.Sleep(10);
+                        if (keyModifier.HasFlag(Keys.Control)) inputSimulator.Keyboard.KeyUp((VirtualKeyCode)Keys.ControlKey);
+                        if (keyModifier.HasFlag(Keys.Shift)) inputSimulator.Keyboard.KeyUp((VirtualKeyCode)Keys.ShiftKey);
+                        if (keyModifier.HasFlag(Keys.Alt)) inputSimulator.Keyboard.KeyUp((VirtualKeyCode)Keys.LMenu);
                     }
-                    Thread.Sleep(100);
+                    Thread.Sleep(50);
                     break;
                 case "Timer":
                     Thread.Sleep((int)(timer*1000));

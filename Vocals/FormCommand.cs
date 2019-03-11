@@ -180,8 +180,18 @@ namespace Vocals {
             answeringSound = true;
         }
 
-
-
-
+        private void QuickButton_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new FormDetect())
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    actionList.Clear();
+                    actionList.Add(dialog.Action);
+                    listBox1.DataSource = null;
+                    listBox1.DataSource = actionList;
+                }
+            }
+        }
     }
 }
